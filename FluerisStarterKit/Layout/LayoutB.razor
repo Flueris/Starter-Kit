@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+
+@using Flueris.Extensions
+@using Flueris.Utilities
+
+<div class="page">
+    <header>
+        <NavBar />
+    </header>
+
+    <div class="left-side">
+        <div class="scrollbar">
+            <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" />
+        </div>
+    </div>
+
+    <div class="scrollbar main">
+        <main id="main">
+            @Body
+        </main>
+    </div>
+</div>
+
+@code {
+    List<SidebarItem> sidebar_list => SidebarModels.GetSidebarToggle();
+}

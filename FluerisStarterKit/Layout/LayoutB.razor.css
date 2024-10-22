@@ -1,0 +1,29 @@
+.page {
+    display: grid;
+    grid-template: 1fr 8fr / 1fr 3.5fr; /* rows and columns */
+    height: 100vh;
+}
+
+main {
+    font-size: inherit;
+    padding: 2rem;
+}
+
+.main {
+    min-width: 640px
+}
+
+header {
+    grid-column: 1 / 2
+}
+
+.scrollbar {
+    overflow-y: auto
+}
+
+@media (min-width: 786px) {
+    .left-side {
+        grid-column: 1;
+        border-right: var(--bs-border-width) var( --bs-border-style) var(--bs-border-color)
+    }
+}

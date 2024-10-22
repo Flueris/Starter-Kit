@@ -1,0 +1,27 @@
+﻿@using Flueris.Components
+@using Flueris.Extensions
+@using Flueris.Utilities
+
+<AppBar URL="/" ColorScheme="light">
+    <Brand>
+        <strong>FluerisStarterKit</strong>
+        <Spacer Orientation="hz" Spacing="2rem"/>
+    </Brand>
+
+    <Navigation>
+       <Tooltip Position="bottom">
+            <Content>
+                Opens demo in a new tab
+            </Content>
+            <Element>
+                <Button ColorScheme="light" Label="Button" />
+            </Element>
+        </Tooltip>
+    </Navigation>
+    
+    <Actions>
+        <Link URL="/">Link</Link>
+        <Spacer Orientation="hz" />
+        <Avatar Rounded=true Icon="fa-brands fa-github" ColorScheme="light" Position="right" URL="https://github.com/Flueris/Starter-Kit" />
+    </Actions>
+</AppBar>
