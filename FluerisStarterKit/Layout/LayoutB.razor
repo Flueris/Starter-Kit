@@ -9,18 +9,30 @@
     </header>
 
     <div class="left-side">
-        <div class="scrollbar">
-            <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" />
-        </div>
+        <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" />
     </div>
 
-    <div class="scrollbar main">
-        <main id="main">
-            @Body
-        </main>
-    </div>
+    <main class="main">
+        @Body
+    </main>
 </div>
 
 @code {
-    List<SidebarItem> sidebar_list => SidebarModels.GetSidebarToggle();
+    List<SidebarItem> sidebar_list => GetSidebarToggle();
+
+    private List<SidebarItem> GetSidebarToggle()
+    {
+        List<SidebarItem> list = new()
+        {
+            new SidebarItem { Id = "1", Group = "0", Label = "Blazor sample pages", Image = "icon-192.png"  },
+            new SidebarItem { Id = "2", Group = "0", Label = "Dialog boxes", Icon = "fa-solid fa-message"  },
+
+            new SidebarItem { Id = "1.1", Group = "1", Label = "Counter", URL = "counter", Icon="fas fa-calculator" },
+            new SidebarItem { Id = "1.2", Group = "1", Label = "Weather ", URL = "weather", Icon="fas fa-thermometer-full" },
+
+            new SidebarItem { Id = "2.1", Group = "2", Label = "Dialog", URL = "dialog", Icon="fas fa-list" },
+        };
+
+        return list;
+    }
 }

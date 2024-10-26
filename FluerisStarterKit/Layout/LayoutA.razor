@@ -6,7 +6,7 @@
 <div class="page">
     <div class="sidebar">
         <NavMenu />
-        <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light"/>
+        <Sidebar DataList="@sidebar_list" Variant="compact" PositionSidebar="right" ColorScheme="light"/>
     </div>
 
     <main>
@@ -21,5 +21,16 @@
 </div>
 
 @code {
-    List<SidebarItem> sidebar_list => SidebarModels.GetSidebarToggle();    
+    List<SidebarItem> sidebar_list => GetSidebarListCompact();
+
+    private List<SidebarItem> GetSidebarListCompact()
+    {
+        List<SidebarItem> list = new()
+            {
+                new SidebarItem { Id = "1", Group = "0", Label = "Counter", URL = "counter", Image = "icon-192.png" },
+                new SidebarItem { Id = "2", Group = "0", Label = "Weather ", URL = "weather", Image = "icon-192.png" },
+            };
+
+        return list;
+    }
 }

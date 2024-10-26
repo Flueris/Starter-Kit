@@ -4,24 +4,42 @@
 
 <AppBar URL="/" ColorScheme="light">
     <Brand>
-        <strong>FluerisStarterKit</strong>
+        <strong>Toggle Sidebar</strong>
         <Spacer Orientation="hz" Spacing="2rem"/>
     </Brand>
 
     <Navigation>
-       <Tooltip Position="bottom">
-            <Content>
-                Opens demo in a new tab
-            </Content>
-            <Element>
-                <Button ColorScheme="light" Label="Button" />
-            </Element>
-        </Tooltip>
+        <Dropdown DataList="@menu_list" Label="Menu" ColorScheme="light" ShowChecked="true" />
     </Navigation>
     
     <Actions>
-        <Link URL="/">Link</Link>
+        <Link URL="https://flueris.com" OpenNewTab="true">Flueris</Link>
         <Spacer Orientation="hz" />
-        <Avatar Rounded=true Icon="fa-brands fa-github" ColorScheme="light" Position="right" URL="https://github.com/Flueris/Starter-Kit" />
+        <Tooltip Position="bottom">
+            <Content>
+                <div class="tooltip-context">
+                    Opens GitHub page for this project in a separate tab page
+                </div>
+            </Content>
+            <Element>
+                <Avatar Rounded=true Icon="fa-brands fa-github" ColorScheme="light" Position="right" URL="https://github.com/Flueris/Starter-Kit" />
+            </Element>
+        </Tooltip>
+        <Avatar Label="AB" Rounded=true Size="sm" ColorScheme="primary" Position="right">
+            <SignIn />
+        </Avatar>
     </Actions>
 </AppBar>
+
+@code {
+    private List<DropdownItem> menu_list => GetMenu();
+    public List<DropdownItem> GetMenu()
+    {
+        List<DropdownItem> list = new();
+
+        list.Add(new DropdownItem() { Id = "1", Label = "Counter", Icon = "fas fa-calculator", URL = "counter" });
+        list.Add(new DropdownItem() { Id = "2", Label = "Weather", Icon = "fas fa-thermometer-full", URL = "weather" });
+
+        return list;
+    }
+}

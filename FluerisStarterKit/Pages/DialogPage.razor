@@ -1,0 +1,42 @@
+﻿@page "/dialog"
+
+@using Flueris.Components
+@using Flueris.Validations
+
+<Button Label="Click to show dialog" ColorScheme="primary" OnClick="ButtonClick" Bordered="true"/>
+
+<!-- Set Dismissible false so the dialog box does not close on clicking anywhere -->
+<Dialog @ref=@dlg HeaderIcon="exclamation" FooterButton="ok" ColorScheme="warning" Dismissible="false"/>
+
+@code {
+    private Dialog? dlg;
+
+    public class Person
+    {
+        public string? Name { get; set; }
+    }
+
+    private void TestRequired()
+    {
+        var person = new Person()
+        {
+            //Name = "test"
+        };
+
+
+        FluerisValidator<Person> obj = new FluerisValidator<Person>(person);
+        obj.Validate(p => p.Name).Required("name is required");
+
+        List<string> errors = obj.GetValidationErrors("Name");
+        if (errors != null)
+        {
+            string error = errors[0];
+            dlg.Show("Error", error);
+        }
+    }
+
+    private void ButtonClick()
+    {
+        TestRequired();
+    }
+}

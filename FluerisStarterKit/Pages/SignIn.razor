@@ -1,0 +1,23 @@
+﻿@using Flueris.Components
+
+<main class="form-signin">
+    <form>
+        <div class="login-label">
+            <h3>Sign in</h3>
+        </div>
+
+        <div class="input-user">
+            <Input InputMode="text" Placeholder="Email Address" @bind-Value="user_name" />
+        </div>
+        <div class="input-password">
+            <Input InputMode="password" Placeholder="Password" @bind-Value="password" />
+        </div>
+
+        <Button ColorScheme="primary" Label="Sign In" Size="md" Style="width:100%" />
+    </form>
+</main>
+
+@code {
+    private string? user_name;
+    private string? password;
+}

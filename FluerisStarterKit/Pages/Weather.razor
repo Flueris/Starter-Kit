@@ -6,6 +6,12 @@
 
 <PageTitle>Weather</PageTitle>
 
+<!-- Set Separator to ">" -->
+<div>
+    <Breadcrumb DataList="@breadcrumbs" Separator=">"/>
+</div>
+
+
 <h1>Weather</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
@@ -19,8 +25,32 @@ else
     <Table DataList="@forecasts">
         <TableColumns>
             <Column Title="Date" Field="@(p => p.Date.ToShortDateString())" />
-            <Column Title="Temp. (C)" Field="@(p => p.TemperatureC)" />
-            <Column Title="Temp. (F)" Field="@(p => p.TemperatureF)" />
+            <Column Title="Temp. (C)" Field="@(p => p.TemperatureC)">
+                <FieldTemplate Context="context">
+                    @{
+                        bool ng = context.Item2.TemperatureC < 0 ? true : false;
+                        string cspr = ng ? "warning" : "primary";
+                    }
+                    <Chip ColorScheme="@cspr">@context.Item2.TemperatureC</Chip>
+                </FieldTemplate>
+            </Column>
+            <Column Title="Temp. (F)" Field="@(p => p.TemperatureF)">
+                <FieldTemplate Context="context">
+                    @{
+                        bool ng = context.Item2.TemperatureF < 0 ? true : false;
+                        string cspr = ng ? "danger" : "primary";
+                    }
+                    @if (ng)
+                    {
+                        <Badge ColorScheme="@cspr">@context.Item2.TemperatureF</Badge>
+                    }
+                    else
+                    {
+                        <Badge ColorScheme="@cspr">@context.Item2.TemperatureF</Badge>
+                    }
+
+                </FieldTemplate>
+            </Column>
             <Column Field="@(p => p.Summary)" />
         </TableColumns>
     </Table>
@@ -28,6 +58,12 @@ else
 
 @code {
     private WeatherForecast[]? forecasts;
+
+    List<BreadcrumbItem> breadcrumbs = new()
+    {
+        new BreadcrumbItem() { Label = "Home", Icon = "fas fa-home", URL="/" },
+        new BreadcrumbItem() { Label = "Weather" },
+    };
 
     protected override async Task OnInitializedAsync()
     {
