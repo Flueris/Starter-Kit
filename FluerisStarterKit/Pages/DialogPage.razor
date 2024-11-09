@@ -3,7 +3,9 @@
 @using Flueris.Components
 @using Flueris.Validations
 
-<Button Label="Click to show dialog" ColorScheme="primary" OnClick="ButtonClick" Bordered="true"/>
+<Button Class="mb-3" Label="Click to show dialog" ColorScheme="primary" OnClick="ButtonClick" Bordered="true"/>
+
+<p>This also demonstrates a use of the Flueris validation library </p>
 
 <!-- Set Dismissible false so the dialog box does not close on clicking anywhere -->
 <Dialog @ref=@dlg HeaderIcon="exclamation" FooterButton="ok" ColorScheme="warning" Dismissible="false"/>
@@ -20,12 +22,12 @@
     {
         var person = new Person()
         {
-            //Name = "test"
+            // Name = "test"
         };
 
 
         FluerisValidator<Person> obj = new FluerisValidator<Person>(person);
-        obj.Validate(p => p.Name).Required("name is required");
+        obj.Validate(p => p.Name).Required("Name is required");
 
         List<string> errors = obj.GetValidationErrors("Name");
         if (errors != null)

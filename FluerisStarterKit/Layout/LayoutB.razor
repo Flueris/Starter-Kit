@@ -12,7 +12,7 @@
         <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" />
     </div>
 
-    <main class="main">
+    <main class="v-scroll main">
         @Body
     </main>
 </div>
@@ -24,13 +24,14 @@
     {
         List<SidebarItem> list = new()
         {
-            new SidebarItem { Id = "1", Group = "0", Label = "Blazor sample pages", Image = "icon-192.png"  },
-            new SidebarItem { Id = "2", Group = "0", Label = "Dialog boxes", Icon = "fa-solid fa-message"  },
+            new SidebarItem { Id = "1", Group = "0", Label = "Forms examples", Image = "icon-192.png"  },
+            new SidebarItem { Id = "2", Group = "0", Label = "Feedback examples", Icon = "fa-solid fa-message"  },
 
-            new SidebarItem { Id = "1.1", Group = "1", Label = "Counter", URL = "counter", Icon="fas fa-calculator" },
-            new SidebarItem { Id = "1.2", Group = "1", Label = "Weather ", URL = "weather", Icon="fas fa-thermometer-full" },
+            new SidebarItem { Id = "1.1", Group = "1", Label = "Inputs", URL = "input-examples" },
+            new SidebarItem { Id = "1.2", Group = "1", Label = "Controlled selection ", URL = "controlled-selection" },
 
-            new SidebarItem { Id = "2.1", Group = "2", Label = "Dialog", URL = "dialog", Icon="fas fa-list" },
+            new SidebarItem { Id = "2.1", Group = "2", Label = "Dialog", URL = "dialog" },
+            new SidebarItem { Id = "2.2", Group = "2", Label = "Toast", URL = "toast-examples" },
         };
 
         return list;

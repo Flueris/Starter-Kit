@@ -1,0 +1,74 @@
+﻿@page "/toast-examples"
+
+<h3>Toast Examples</h3>
+
+@using Flueris.Components
+@using Flueris.Validations
+
+<Button Class="mb-3" Label="Click to show simple toast" ColorScheme="primary" OnClick="ButtonClickA" Bordered="true" />
+<Toast @ref="@ta" ColorScheme="primary" Icon="fas fa-info" Position="tr">
+
+</Toast>
+
+<Spacer />
+
+<Button Class="mb-3" Label="Click to show toast with callout" ColorScheme="info" OnClick="ButtonClickB" Bordered="true" />
+<Toast @ref="@tb" ColorScheme="info" Icon="fas fa-info" Callout=true Title="Error" />
+
+@code {
+    private Toast? ta;
+    private Toast? tb;
+
+    public class Person
+    {
+        public string? Name { get; set; }
+    }
+
+
+    private void ButtonClickA()
+    {
+        TestRequiredA();
+    }
+    private void TestRequiredA()
+    {
+        var person = new Person()
+        {
+            // Name = "test"
+        };
+
+
+        FluerisValidator<Person> obj = new FluerisValidator<Person>(person);
+        obj.Validate(p => p.Name).Required("Name is required");
+
+        List<string> errors = obj.GetValidationErrors("Name");
+        if (errors != null)
+        {
+            string error = errors[0];
+            ta.Show(error);
+        }
+    }
+
+    private void ButtonClickB()
+    {
+        TestRequiredB();
+    }
+    private void TestRequiredB()
+    {
+        var person = new Person()
+        {
+            // Name = "test"
+        };
+
+
+        FluerisValidator<Person> obj = new FluerisValidator<Person>(person);
+        obj.Validate(p => p.Name).Required("Name is required");
+
+        List<string> errors = obj.GetValidationErrors("Name");
+        if (errors != null)
+        {
+            string error = errors[0];
+            tb.Show(error);
+        }
+    }
+
+}

@@ -1,0 +1,98 @@
+﻿@page "/controlled-selection"
+
+@using Flueris.Components
+
+<h3>Controlled Selection</h3>
+
+<h4>Select Component</h4>
+<div style="width:50%">
+    <Select TItem="Countries" TProperty="string" DataList="@countries" SelectionText="Select country" StyleDropdown="height:250px" Label="Countries" />
+</div>
+
+<Spacer Spacing="2rem"/>
+<h4>Multiselect Component</h4>
+<div style="width:50%">
+    <Select EnableSearch=true @bind-Value=@selection Label="Employees" SelectionText="Select Employee" DataList="@employees" KeyField="EmployeeID" SearchField="FirstName">
+        <DataHeader>
+            <FlexBox Class="px-3">
+                <span style="width:15%">Emp Id</span>
+                <span style="width:35%">First Name</span>
+                <span style="width:50%">Designation</span>
+            </FlexBox>
+        </DataHeader>
+        <DataTemplate Context="item">
+            <FlexBox Class="px-3">
+                <span style="width:15%">@item.EmployeeID</span>
+                <span style="width:35%">@item.FirstName</span>
+                <span style="width:50%">@item.Designation</span>
+            </FlexBox>
+        </DataTemplate>
+        <SelectionTemplate Context="item">
+            <span>@item.FirstName</span>
+            <span class="ps-1">@item.Designation</span>
+        </SelectionTemplate>
+    </Select>
+</div>
+
+<Spacer Spacing="2rem" />
+<h4>Input Tags Component</h4>
+<div style="width:50%">
+    <p>Input tags are like multiselect, but there is no predefined list to select from. Useful when you wish to allow users to define their tags</p>
+    <span>Enter 'abc' and press space</span>
+    <InputTags MaxEntries="3"/>
+</div>
+
+
+@code {
+    private string selection;
+    private List<Countries> countries;
+    private List<Employee> employees;
+
+    protected override void OnInitialized()
+    {
+        Countries c = new();
+        countries = c.GetCountries();
+
+        Employee e = new();
+        employees = e.GetEmployees();
+    }
+
+    public class Countries
+    {
+        public string? Key { get; set; }
+        public string? Label { get; set; }
+        public List<Countries> GetCountries() => new List<Countries>()
+        {
+            new Countries {Key="++", Label="A"},
+            new Countries {Key = "AM", Label="Armenia"},
+            new Countries {Key = "AW", Label="Aruba"},
+            new Countries {Key = "--", Label=""},
+            new Countries {Key = "++", Label="B"},
+            new Countries {Key = "BS", Label="Bahamas"},
+            new Countries {Key = "BH", Label="Bahrain"},
+            new Countries {Key = "--", Label=""},
+            new Countries {Key = "++", Label="C"},
+            new Countries {Key = "CM", Label="Cameroon"},
+            new Countries {Key = "CA", Label="Canada"},
+        };
+    }  // Countries
+
+    public class Employee
+    {
+        public string FirstName { get; set; }
+        public string EmployeeID { get; set; }
+        public string Designation { get; set; }
+        public string Country { get; set; }
+
+        public List<Employee> GetEmployees() => new List<Employee>()
+        {
+            new Employee() { FirstName = "Kelly Rodriguez", EmployeeID = "1", Designation = "Computer Programmer", Country = "England"  },
+            new Employee() { FirstName = "Diane Dorn", EmployeeID = "2", Designation = "Computer Programmer", Country = "USA" },
+            new Employee() { FirstName = "Name Schimmel", EmployeeID = "3", Designation = "Computer Programmer", Country = "USA" },
+            new Employee() { FirstName = "Lurline Schamberger", EmployeeID = "4", Designation = "Network administrator", Country = "USA" },
+            new Employee() { FirstName = "Oda Legros", EmployeeID = "5", Designation = "Web developer", Country = "USA" },
+        };
+    }   // Employee
+
+
+}

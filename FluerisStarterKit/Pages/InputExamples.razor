@@ -1,0 +1,46 @@
+﻿@page "/input-examples"
+
+@using Flueris.Components
+
+
+<h3>Input Examples</h3>
+
+<div class="wide">
+    <Input InputMode="text" Label="Text field 1" RequiredIndicator=true @bind-Value=@person.Text1 MaxLength="20" />
+    <Spacer />
+
+    <Input InputMode="text" Label="Restricts user from entering #$%" SuppressCharacters="#$%" CommaDelimited="true" @bind-Value="person.Text2" />
+    <Spacer />
+
+    <Checkbox @bind-Value="person.Type1">Check box</Checkbox>
+    <Spacer />
+
+    <Input InputMode="numeric" Label="With suffix" CommaDelimited="true" Suffix=" $" @bind-Value="person.Amount" />
+    <Spacer />
+
+    <Input InputMode="numeric" Label="Integer input only" Placeholder="Only integer values allowed" @bind-Value="person.Value" />
+    <Spacer />
+
+    <Input InputMode="numeric" TProperty="decimal" Label="Decimal amounts with comma delimited display" DecimalPlaces="3" CommaDelimited="true"  />
+    <Spacer />
+
+    <Date InputMode="date" Size="sm" Label="Date Field" TProperty="DateTime" />
+    <Spacer />
+
+    <TextArea InputMode="text" Label="Text Area" MaxLength="500" />
+    <Spacer />
+</div>
+
+@code {
+    private Person person = new();
+    public class Person
+    {
+        public string? Text1 { get; set; }
+        public string? Text2 { get; set; }
+        public byte Type1 { get; set; }
+        public int Value { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Amount1 { get; set; }
+    }
+
+}

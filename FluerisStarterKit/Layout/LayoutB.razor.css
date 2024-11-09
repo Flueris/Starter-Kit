@@ -1,11 +1,10 @@
 .page {
     display: grid;
-    grid-template: 1fr 12fr / 1fr 4fr;
+    grid-template: 1fr 8fr / 1fr 4fr;
     height:100vh
 }
 
 header {
-    padding: 1rem;
     grid-column: 1 / 3;
 }
 
@@ -17,6 +16,11 @@ main {
 .main {
     min-width: 640px
 }
+
+.v-scroll {
+    overflow-y: auto;
+}
+
 
 @media (min-width: 786px) {
     .left-side {
