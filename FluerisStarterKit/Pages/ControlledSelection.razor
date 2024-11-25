@@ -5,31 +5,31 @@
 <h3>Controlled Selection</h3>
 
 <h4>Select Component</h4>
-<div style="width:50%">
+<div style="width:25%">
     <Select TItem="Countries" TProperty="string" DataList="@countries" SelectionText="Select country" StyleDropdown="height:250px" Label="Countries" />
 </div>
 
-<Spacer Spacing="2rem"/>
+<Spacer Spacing="2rem" />
 <h4>Multiselect Component</h4>
-<div style="width:50%">
+<div style="width:40%">
     <Select EnableSearch=true @bind-Value=@selection Label="Employees" SelectionText="Select Employee" DataList="@employees" KeyField="EmployeeID" SearchField="FirstName">
         <DataHeader>
-            <FlexBox Class="px-3">
+            <FlexBox Class="px-1" Gap="0">
                 <span style="width:15%">Emp Id</span>
-                <span style="width:35%">First Name</span>
-                <span style="width:50%">Designation</span>
+                <span style="width:40%">First Name</span>
+                <span style="width:45%">Designation</span>
             </FlexBox>
         </DataHeader>
         <DataTemplate Context="item">
-            <FlexBox Class="px-3">
+            <FlexBox Class="px-1" Gap="0">
                 <span style="width:15%">@item.EmployeeID</span>
-                <span style="width:35%">@item.FirstName</span>
-                <span style="width:50%">@item.Designation</span>
+                <span style="width:40%">@item.FirstName</span>
+                <span style="width:45%">@item.Designation</span>
             </FlexBox>
         </DataTemplate>
         <SelectionTemplate Context="item">
             <span>@item.FirstName</span>
-            <span class="ps-1">@item.Designation</span>
+            <span style="padding-left:10px">@item.Designation</span>
         </SelectionTemplate>
     </Select>
 </div>
@@ -39,9 +39,8 @@
 <div style="width:50%">
     <p>Input tags are like multiselect, but there is no predefined list to select from. Useful when you wish to allow users to define their tags</p>
     <span>Enter 'abc' and press space</span>
-    <InputTags MaxEntries="3"/>
+    <InputTags MaxEntries="3" />
 </div>
-
 
 @code {
     private string selection;
