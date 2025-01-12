@@ -6,14 +6,21 @@
             <h3>Sign in</h3>
         </div>
 
-        <div class="input-user">
-            <Input InputMode="text" Placeholder="Email Address" @bind-Value="user_name" />
-        </div>
-        <div class="input-password">
-            <Input InputMode="password" Placeholder="Password" @bind-Value="password" />
-        </div>
+        <Block>
+            <Input InputMode="text" Placeholder="Email Address" @bind-Value="@user_name" />
+        </Block>
 
-        <Button ColorScheme="primary" Label="Sign In" Size="md" Style="width:100%" />
+        <Block>
+            <Input InputMode="password" Placeholder="Password" @bind-Value="@password" />
+        </Block>
+
+        <Block>
+            <Checkbox>Remember Me</Checkbox>
+        </Block>
+
+        <div class="btn-q7vsv">
+            <Button class="w-100" ColorScheme="primary" Label="Sign In" Size="md"  />
+        </div>
     </form>
 </main>
 

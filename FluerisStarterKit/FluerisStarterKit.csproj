@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Flueris.Components" Version="9.0.0" />
-    <PackageReference Include="Flueris.Extensions" Version="9.0.1" />
+    <PackageReference Include="Flueris.Components" Version="9.0.1" />
+    <PackageReference Include="Flueris.Extensions" Version="9.0.2" />
     <PackageReference Include="Flueris.Validations" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
