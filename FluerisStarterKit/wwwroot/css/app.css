@@ -83,3 +83,7 @@ html, body {
 code {
     color: #c02d76;
 }
+
+.mt-sidebar {
+    margin-top: 2.25rem;
+}

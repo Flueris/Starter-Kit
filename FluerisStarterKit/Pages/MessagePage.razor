@@ -1,0 +1,21 @@
+﻿@page "/message"
+
+@using Flueris.Components
+
+<Button Class="mb-3" Label="Click to show Message" ColorScheme="primary" OnClick="ButtonClick" Bordered="true"/>
+
+<!-- Set Dismissible false so the dialog box does not close on clicking anywhere -->
+<Message @ref=@msg ColorScheme="primary" Title="Hello World"  Dismissible="false">
+    @((MarkupString)msg1)
+</Message>
+
+@code {
+    private Message? msg;
+
+    string msg1 = "Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit.</strong>";
+
+    private void ButtonClick()
+    {
+        msg.Show();
+    }
+}

@@ -4,18 +4,23 @@
 @using Flueris.Utilities
 
 <div class="page">
-    <header>
-        <NavBar />
-    </header>
+    <NavBar />
 
-    <div class="left-side">
-        <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" />
+    <div class="sidebar mt-3">
+        <div class="v-scroll">
+            <!-- mt-sidebar is defined in app.css -->
+            <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" Class="mt-sidebar" />
+        </div>
     </div>
 
-    <main class="v-scroll main">
-        @Body
+    <main id="main">
+        <article class="content px-3">
+            @Body
+        </article>
     </main>
 </div>
+
+
 
 @code {
     List<SidebarItem> sidebar_list => GetSidebarToggle();
@@ -30,7 +35,7 @@
             new SidebarItem { Id = "1.1", Group = "1", Label = "Inputs", URL = "input-examples" },
             new SidebarItem { Id = "1.2", Group = "1", Label = "Controlled inputs ", URL = "controlled-selection" },
 
-            new SidebarItem { Id = "2.1", Group = "2", Label = "Dialog", URL = "dialog" },
+            new SidebarItem { Id = "2.1", Group = "2", Label = "Message", URL = "message" },
             new SidebarItem { Id = "2.2", Group = "2", Label = "Toast", URL = "toast-examples" },
         };
 
