@@ -1,15 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
 @using Flueris.Extensions
-@using Flueris.Utilities
 
 <div class="page">
     <NavBar />
 
-    <div class="sidebar mt-3">
+    <div class="sidebar mt-sidebar">
         <div class="v-scroll">
-            <!-- mt-sidebar is defined in app.css -->
-            <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" Class="mt-sidebar" />
+            <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" />
         </div>
     </div>
 
@@ -20,7 +18,7 @@
     </main>
 </div>
 
-
+<Flueris.Components.MessageComponent />
 
 @code {
     List<SidebarItem> sidebar_list => GetSidebarToggle();
@@ -31,12 +29,19 @@
         {
             new SidebarItem { Id = "1", Group = "0", Label = "Forms examples", Image = "icon-192.png"  },
             new SidebarItem { Id = "2", Group = "0", Label = "Feedback examples", Icon = "fa-solid fa-message"  },
+            new SidebarItem { Id = "3", Group = "0", Label = "Table", Icon = "fas fa-table"  },
+            new SidebarItem { Id = "4", Group = "0", Label = "General", Icon = "fas fa-random"  },
 
             new SidebarItem { Id = "1.1", Group = "1", Label = "Inputs", URL = "input-examples" },
-            new SidebarItem { Id = "1.2", Group = "1", Label = "Controlled inputs ", URL = "controlled-selection" },
+            new SidebarItem { Id = "1.2", Group = "1", Label = "Select", URL = "controlled-selection" },
 
             new SidebarItem { Id = "2.1", Group = "2", Label = "Message", URL = "message" },
             new SidebarItem { Id = "2.2", Group = "2", Label = "Toast", URL = "toast-examples" },
+
+            new SidebarItem { Id = "3.1", Group = "3", Label = "Table Example A", URL = "table-weather" },
+            new SidebarItem { Id = "3.2", Group = "3", Label = "Table Example B", URL = "table-examplea" },
+
+            new SidebarItem { Id = "4.1", Group = "4", Label = "Counter", URL = "counter" }
         };
 
         return list;

@@ -1,21 +1,43 @@
 ﻿@page "/message"
 
 @using Flueris.Components
+@inject MessageService Service
 
-<Button Class="mb-3" Label="Click to show Message" ColorScheme="primary" OnClick="ButtonClick" Bordered="true"/>
+<span>Directly use message component in a page.</span>
+<Block>
+    <Button Class="mb-3" Label="Click to show Message" ColorScheme="primary" OnClick="ButtonClick" Bordered="true" />
+    <Message @ref=@msg ColorScheme="primary" Title="Hello World">
+        @((MarkupString)msg1)
+    </Message>
+</Block>
 
-<!-- Set Dismissible false so the dialog box does not close on clicking anywhere -->
-<Message @ref=@msg ColorScheme="primary" Title="Hello World"  Dismissible="false">
-    @((MarkupString)msg1)
-</Message>
+<span>Using Message Service. To implement Message service: </span>
+<ul>
+    <li>In program.cs add AddScoped MessageService</li>
+    <li>In MainLayout add Flueris.Components.MessageComponent </li>
+    <li>In page, inject Message service. Then call Service.ShowMessage(options)</li>
+</ul>
 
+<Block>
+    <Button Label="click me" ColorScheme="primary" OnClick="MessageServiceClick" />
+</Block>
 @code {
     private Message? msg;
 
-    string msg1 = "Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit.</strong>";
+    private string msg1 = "Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit.</strong>";
 
     private void ButtonClick()
     {
         msg.Show();
+    }
+
+    private void MessageServiceClick()
+    {
+        Service.ShowMessage(new MessageOptions()
+        {
+            ColorScheme = "primary",
+            Message = msg1,
+            Title = "Message Service"
+        });
     }
 }

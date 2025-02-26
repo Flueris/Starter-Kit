@@ -5,8 +5,18 @@
 @using Flueris.Components
 @using Flueris.Validations
 
-<Button Class="mb-3" Label="Click to show simple toast" ColorScheme="primary" OnClick="ButtonClickA" Bordered="true" />
-<Toast @ref="@ta" ColorScheme="primary" Icon="fas fa-info" />
+<p>The Toast component is quite flexible to show content. Here are a couple of ways content can be rendered.</p>
+
+<Button Class="mb-3" Label="Click to show toast" ColorScheme="primary" OnClick="ButtonClickA" Bordered="true" />
+<Toast @ref="@ta" ColorScheme="primary" Icon="fas fa-info">
+    <div class="d-flex gap-4 text-bg-primary p-3">
+        <span><i class="fa-solid fa-circle-check fa-lg"></i></span>
+        <div class="d-flex flex-grow-1 align-items-center justify-content-between">
+            <span class="fw-semibold">Lorem ipsum dolor sit amet.</span>
+            <CloseButton Class="btn-close btn-close-white ms-auto" />
+        </div>
+    </div>
+</Toast>
 
 <Spacer />
 
@@ -17,56 +27,15 @@
     private Toast? ta;
     private Toast? tb;
 
-    public class Person
-    {
-        public string? Name { get; set; }
-    }
-
+    private string msg = "<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>";
 
     private void ButtonClickA()
     {
-        TestRequiredA();
-    }
-    private void TestRequiredA()
-    {
-        var person = new Person()
-        {
-            // Name = "test"
-        };
-
-
-        FluerisValidator<Person> obj = new FluerisValidator<Person>(person);
-        obj.Validate(p => p.Name).Required("Name is required");
-
-        List<string> errors = obj.GetValidationErrors("Name");
-        if (errors != null)
-        {
-            string error = errors[0];
-            ta.Show(error);
-        }
+        ta.Show();
     }
 
     private void ButtonClickB()
     {
-        TestRequiredB();
+        tb.Show("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
     }
-    private void TestRequiredB()
-    {
-        var person = new Person()
-        {
-            // Name = "test"
-        };
-
-
-        FluerisValidator<Person> obj = new FluerisValidator<Person>(person);
-        obj.Validate(p => p.Name).Required("Name is required");
-
-        List<string> errors = obj.GetValidationErrors("Name");
-        if (errors != null)
-        {
-            string error = errors[0];
-            tb.Show(error);
-        }
-    }
-
 }

@@ -1,0 +1,45 @@
+﻿@page "/table-examplea"
+
+@using Flueris.Components
+
+<h3>Table Example A</h3>
+
+<Table DataList="@people" TableStriped="true" HeaderColorScheme="dark">
+    <TableColumns>
+        <Column Field="@(p => p.Id)" />
+        <Column Field="@(p => p.Name)" />
+        <Column Field="@(p => p.Phone)" />
+        <Column Field="@(p => p.Address)" />
+        <Column Title="Actions" Field="@(s => s.Id)" TextAlign="center">
+            <FieldTemplate Context="context">
+                <Button Size="sm" Bordered=false Icon="fas fa-pencil fa-xs" Label="Edit" OnClick="@(() => RowClicked(@context.Item1, @context.Item2))" />
+            </FieldTemplate>
+        </Column>
+    </TableColumns>
+</Table>
+
+<Message @ref=@msg ColorScheme="primary" FooterButton="none" Title="@title" BackdropColor="white">
+    @((MarkupString)msg1)
+</Message>
+
+@code {
+    private Message? msg;
+    private string msg1;
+    private string title;
+    private record People(int Id, string Name, string Phone, string Address, string? Dummy = default);
+    private IQueryable<People> people = new[]
+    {
+        new People(1, "Archer MacRanald", "135-710-4064", "5108 Southridge Way,	Crownhardt"),
+        new People(2, "Kimberli McGuire", "418-492-7202", "8606 Briar Crest Avenue,	Victoria"),
+        new People(3, "Giorgio Tizzard", "699-730-1374", "10 Susan Court,	Cottonwood"),
+        new People(4, "Ursola Cashin", "507-840-7807", "7056 Graceland Parkway,	Sherman"),
+        new People(5, "Niki Backsal", "771-155-1087", "4726 East Drive,	Cherokee"),
+    }.AsQueryable();
+
+    private async void RowClicked(int row, People people)
+    {
+        title = $"Id: {people.Id}";
+        msg1 = $"<strong>Name: {people.Name}</strong>";
+        msg.Show();
+    }
+}

@@ -5,13 +5,13 @@
 <h3>Controlled Selection</h3>
 
 <h4>Select Component</h4>
-<div style="width:25%">
+<div class="w-25">
     <Select TItem="Countries" TProperty="string" DataList="@countries" SelectionText="Select country" StyleDropdown="height:250px" Label="Countries" />
 </div>
 
 <Spacer Spacing="2rem" />
-<h4>Multiselect Component</h4>
-<div style="width:40%">
+<h4>Multiple Columns</h4>
+<div class="w-50">
     <Select EnableSearch=true @bind-Value=@selection Label="Employees" SelectionText="Select Employee" DataList="@employees" KeyField="EmployeeID" SearchField="FirstName">
         <DataHeader>
             <FlexBox Class="px-1" Gap="0">
@@ -34,14 +34,6 @@
     </Select>
 </div>
 
-<Spacer Spacing="2rem" />
-<h4>Input Tags Component</h4>
-<div style="width:50%">
-    <p>Input tags are like multiselect, but there is no predefined list to select from. Useful when you wish to allow users to define their tags</p>
-    <span>Enter 'abc' and press space</span>
-    <InputTags MaxEntries="3" />
-</div>
-
 @code {
     private string selection;
     private List<Countries> countries;
@@ -62,9 +54,11 @@
         public string? Label { get; set; }
         public List<Countries> GetCountries() => new List<Countries>()
         {
+            // ++ indicates Options Group
             new Countries {Key="++", Label="A"},
             new Countries {Key = "AM", Label="Armenia"},
             new Countries {Key = "AW", Label="Aruba"},
+            // -- indicates a line separator
             new Countries {Key = "--", Label=""},
             new Countries {Key = "++", Label="B"},
             new Countries {Key = "BS", Label="Bahamas"},

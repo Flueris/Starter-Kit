@@ -1,4 +1,4 @@
-﻿@page "/weather"
+﻿@page "/table-weather"
 
 @using Flueris.Components
 
@@ -7,14 +7,11 @@
 <PageTitle>Weather</PageTitle>
 
 <!-- Set Separator to ">" -->
-<div>
-    <Breadcrumb DataList="@breadcrumbs" Separator=">"/>
-</div>
-
+<Breadcrumb DataList="@breadcrumbs" Separator=">"/>
 
 <h1>Weather</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>This component demonstrates use of the Table, Badge and Breadcrumb components</p>
 
 @if (forecasts == null)
 {
