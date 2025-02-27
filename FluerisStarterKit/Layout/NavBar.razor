@@ -3,6 +3,17 @@
 @using Flueris.Utilities
 
 <AppBar URL="/" ColorScheme="light">
+    <!-- 
+        Use the Overflow elements to display data in responsive mode. In this case we are displaying data as a treeview
+    -->
+    <AppBarOverflow>
+        <Hamburger Class="ms-3" @ref="@hb" OnClick="HamburgerClickEvent">
+            <div class="p-3">
+                <Treeview DataList="@GetTreeList()" ColorScheme="secondary" BorderStyle="none" />
+            </div>
+        </Hamburger>
+    </AppBarOverflow>
+
     <Brand>
         <strong class="ms-3">Starter Kit</strong>
     </Brand>
@@ -41,13 +52,44 @@
 </AppBar>
 
 @code {
+    private Hamburger hb;
     private List<DropdownItem> menu_list => GetMenu();
+
     public List<DropdownItem> GetMenu()
     {
         List<DropdownItem> list = new();
 
         list.Add(new DropdownItem() { Id = "1", Label = "Counter", Icon = "fas fa-calculator", URL = "counter" });
         list.Add(new DropdownItem() { Id = "2", Label = "Weather", Icon = "fas fa-thermometer-full", URL = "weather" });
+
+        return list;
+    }
+
+    private void HamburgerClickEvent()
+    {
+        hb.ToggleContent();
+    }
+
+    private List<TreeItem> GetTreeList()
+    {
+        List<TreeItem> list = new()
+        {
+            new TreeItem { Id = "1", Group = "0", Label = "Forms examples", Image = "icon-192.png"  },
+            new TreeItem { Id = "2", Group = "0", Label = "Feedback examples", Icon = "fa-solid fa-message"  },
+            new TreeItem { Id = "3", Group = "0", Label = "Table", Icon = "fas fa-table"  },
+            new TreeItem { Id = "4", Group = "0", Label = "General", Icon = "fas fa-random"  },
+
+            new TreeItem { Id = "1.1", Group = "1", Label = "Inputs", URL = "input-examples" },
+            new TreeItem { Id = "1.2", Group = "1", Label = "Select", URL = "controlled-selection" },
+
+            new TreeItem { Id = "2.1", Group = "2", Label = "Message", URL = "message" },
+            new TreeItem { Id = "2.2", Group = "2", Label = "Toast", URL = "toast-examples" },
+
+            new TreeItem { Id = "3.1", Group = "3", Label = "Table Example A", URL = "table-weather" },
+            new TreeItem { Id = "3.2", Group = "3", Label = "Table Example B", URL = "table-examplea" },
+
+            new TreeItem { Id = "4.1", Group = "4", Label = "Counter", URL = "counter" }
+        };
 
         return list;
     }

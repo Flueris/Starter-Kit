@@ -18,14 +18,31 @@
     </TableColumns>
 </Table>
 
-<Message @ref=@msg ColorScheme="primary" FooterButton="none" Title="@title" BackdropColor="white">
-    @((MarkupString)msg1)
-</Message>
+<Modal @ref=@ma Title="Hello World" ColorScheme="secondary" Size="lg" Dismissible="true">
+    <Body>
+        <form class="p-3">
+            <div class="mb-3">
+                <Input InputMode="numeric" Label="Id" RequiredIndicator=true @bind-Value=@id MaxLength="20" />
+            </div>
+            <div class="mb-3">
+                <Input InputMode="text" Label="Name" RequiredIndicator=true @bind-Value=@name MaxLength="20" />
+            </div>
+        </form>
+    </Body>
+    <Footer>
+        <div class="modal-footer">
+            <Button Label="Close" ColorScheme="primary" OnClick="Close" />
+            <Button Label="Save" ColorScheme="primary" />
+        </div>
+    </Footer>
+</Modal>
 
 @code {
+    private Modal ma;
     private Message? msg;
-    private string msg1;
-    private string title;
+
+    private int id;
+    private string name;
     private record People(int Id, string Name, string Phone, string Address, string? Dummy = default);
     private IQueryable<People> people = new[]
     {
@@ -36,10 +53,15 @@
         new People(5, "Niki Backsal", "771-155-1087", "4726 East Drive,	Cherokee"),
     }.AsQueryable();
 
-    private async void RowClicked(int row, People people)
+    private void RowClicked(int row, People people)
     {
-        title = $"Id: {people.Id}";
-        msg1 = $"<strong>Name: {people.Name}</strong>";
-        msg.Show();
+        id = people.Id;
+        name = people.Name;
+        ma.Show();
+    }
+
+    private void Close()
+    {
+        ma.Close();
     }
 }

@@ -6,7 +6,7 @@
 
 <h4>Select Component</h4>
 <div class="w-25">
-    <Select TItem="Countries" TProperty="string" DataList="@countries" SelectionText="Select country" StyleDropdown="height:250px" Label="Countries" />
+    <Select TItem="Countries" TProperty="string" DataList="@countries" SelectionText="Select country" StyleDropdown="max-height:250px" Label="Countries" />
 </div>
 
 <Spacer Spacing="2rem" />
@@ -34,10 +34,19 @@
     </Select>
 </div>
 
+<Spacer />
+<h4>Select Component</h4>
+<div class="w-25">
+    <Select TItem="Countries" TProperty="string" DataList="@countries" @bind-Value="@initial" SelectionText="@selected_text" StyleDropdown="max-height:250px" Label="Preselect Country" />
+</div>
+
 @code {
     private string selection;
     private List<Countries> countries;
     private List<Employee> employees;
+
+    private string initial = "BS";
+    private string selected_text = "Bahamas";
 
     protected override void OnInitialized()
     {
