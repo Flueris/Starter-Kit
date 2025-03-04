@@ -3,15 +3,14 @@
 @using Flueris.Extensions
 
 <div class="page">
-    <NavBar />
-
-    <div class="sidebar mt-sidebar">
+    <div class="sidebar">
         <div class="v-scroll">
-            <Sidebar DataList="@sidebar_list" Variant="toggle" PositionSidebar="right" ColorScheme="light" />
+            <Sidebar DataList="@sidebar_list" Variant="toggle" ColorScheme="light" Class="pt-4rem"/>
         </div>
     </div>
 
     <main id="main">
+        <NavBar />
         <article class="content px-3">
             @Body
         </article>
@@ -34,6 +33,7 @@
 
             new SidebarItem { Id = "1.1", Group = "1", Label = "Inputs", URL = "input-examples" },
             new SidebarItem { Id = "1.2", Group = "1", Label = "Select", URL = "controlled-selection" },
+            new SidebarItem { Id = "1.3", Group = "1", Label = "Multiselect", URL = "multiselect" },
 
             new SidebarItem { Id = "2.1", Group = "2", Label = "Message", URL = "message" },
             new SidebarItem { Id = "2.2", Group = "2", Label = "Toast", URL = "toast-examples" },

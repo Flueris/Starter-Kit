@@ -1,0 +1,89 @@
+﻿@page "/multiselect"
+
+@using Flueris.Components
+@inject HttpClient Http
+
+<h3>Multiselect Page</h3>
+
+<p>Basic Setup</p>
+<div class="w-25">
+    <Multiselect TItem="MultiselectList" TProperty="string" DataList="@list_countries" />
+</div>
+
+<Spacer Spacing="2rem" />
+
+<p>With External Search</p>
+<p>This only demonstrates code to make external calls</p>
+<div class="w-25">
+    <Multiselect Label="Multiselect Example" TItem="ControlDropdown" TProperty="string" 
+        DataList="@external_list" StyleDropdown="height:10rem" @bind-Values="@selected_list" 
+        SearchField="FullName" EnableSearch=true IsExternalSearch=true OnExternalSearch="SearchEvent" />
+</div>
+
+
+@code {
+    private List<MultiselectList> list_countries = new();
+    private List<ControlDropdown> external_list = new();
+    private List<string>? selected_list;
+
+    protected override void OnInitialized()
+    {
+        MultiselectList obj = new MultiselectList();
+        list_countries = obj.GetCountries();
+    }
+
+    public class MultiselectList
+    {
+        public string Key { get; set; }
+        public string? Label { get; set; }
+
+        public List<MultiselectList> GetCountries() => new List<MultiselectList>()
+        {
+            new MultiselectList {Key = "++", Label="A"},
+            new MultiselectList {Key = "1", Label="Armenia"},
+            new MultiselectList {Key = "2", Label="Aruba"},
+            new MultiselectList {Key = "3", Label="Australia"},
+            new MultiselectList {Key = "4", Label="Austria"},
+            new MultiselectList {Key = "--", Label=""},
+            new MultiselectList {Key = "++", Label="B"},
+            new MultiselectList {Key = "5", Label="Bahamas"},
+            new MultiselectList {Key = "6", Label="Bahrain"},
+            new MultiselectList {Key = "7", Label="Bangladesh"},
+            new MultiselectList {Key = "8", Label="Barbados"},
+        };
+    }
+
+    public class ControlDropdown
+    {
+        public string Key { get; set; }
+        public string Label { get; set; }
+    }
+
+    private async void SearchEvent(string search)
+    {
+        Console.WriteLine(search);
+        // Retrieve data after a minimum number of characters is entered
+        if (!string.IsNullOrEmpty(search) && search.Length > 2)
+        {
+            try
+            {
+                string path = "Http path to get data from ";
+                external_list = await Http.GetFromJsonAsync<List<ControlDropdown>>(path);
+                StateHasChanged();
+                Thread.Sleep(10);
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+        }
+        else
+        {
+            if (external_list != null)
+            {
+                external_list.Clear();
+                StateHasChanged();
+            }
+        }
+    }
+}

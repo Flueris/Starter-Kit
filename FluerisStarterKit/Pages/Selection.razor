@@ -34,10 +34,10 @@
     </Select>
 </div>
 
-<Spacer />
+<Spacer Spacing="2rem" />
 <h4>Select Component</h4>
 <div class="w-25">
-    <Select TItem="Countries" TProperty="string" DataList="@countries" @bind-Value="@initial" SelectionText="@selected_text" StyleDropdown="max-height:250px" Label="Preselect Country" />
+    <Select TItem="Countries" TProperty="string" DataList="@countries" @bind-Value="@initial"  StyleDropdown="max-height:250px" Label="Preselect Country" />
 </div>
 
 @code {
@@ -46,7 +46,6 @@
     private List<Employee> employees;
 
     private string initial = "BS";
-    private string selected_text = "Bahamas";
 
     protected override void OnInitialized()
     {

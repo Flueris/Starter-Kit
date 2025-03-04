@@ -79,3 +79,7 @@ html, body {
 code {
     color: #c02d76;
 }
+
+.pt-4rem {
+    padding-top: 4rem
+}
