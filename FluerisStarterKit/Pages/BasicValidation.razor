@@ -1,0 +1,82 @@
+﻿@page "/basic-validation"
+
+@using Flueris.Components
+@using Flueris.Validations
+
+@implements IDisposable
+
+<EditForm EditContext="edit_context" OnValidSubmit="@HandleSubmit">
+    <div class="is-flex-column mt-3">
+        <div class="shadow p-3 form-signin">
+            <Input InputMode="text" Placeholder="User name" @bind-Value="@record.UserName" />
+            <ValidationMessage For="@(() => record.UserName)" />
+            <Spacer />
+
+            <Input InputMode="text" Placeholder="email" @bind-Value="@record.Email" />
+            <ValidationMessage For="@(() => record.Email)" />
+            <Spacer />
+
+            <Button Type="submit" class="w-100" ColorScheme="primary" Label="Sign In" />
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    private AccountClass record;
+    private EditContext? edit_context;
+    private ValidationMessageStore? message_store;
+
+    protected override void OnInitialized()
+    {
+        InitializeContext();
+    }
+
+    private void InitializeContext()
+    {
+        edit_context = new(record = new());
+        edit_context.OnValidationRequested += ValidationRequested;
+        edit_context.OnFieldChanged += FieldChanged;
+        message_store = new(edit_context);
+    }
+
+    public class AccountClass
+    {
+        public string? Email { get; set; }
+        public string? UserName { get; set; }
+    }
+
+    private void ValidationRequested(object? sender, ValidationRequestedEventArgs args)
+    {
+        message_store?.Clear();
+        ValidateInputs();
+    }
+
+    private void FieldChanged(object? sender, FieldChangedEventArgs args)
+    {
+        message_store?.Clear();
+    }
+
+    private void ValidateInputs()
+    {
+        FluerisValidator<AccountClass> obj = new FluerisValidator<AccountClass>(record);
+        obj.Validate(p => p.UserName).Required("User name is required");
+        obj.Validate(p => p.Email).Required("Email address is required").EmailAddress("A valid email is required");
+
+        obj.ProcessValidationResult(edit_context, message_store);
+    }
+
+    private async Task HandleSubmit()
+    {
+        edit_context.Validate();
+    }
+
+    public void Dispose()
+    {
+        if (edit_context is not null)
+        {
+            edit_context.OnValidationRequested -= ValidationRequested;
+            edit_context.OnFieldChanged -= FieldChanged;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+﻿
+.is-flex-column {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.form-signin {
+    width: 450px;
+    padding: 1rem;
+}
+
+.pt-32px {
+    padding-top: 32px !important;
+}

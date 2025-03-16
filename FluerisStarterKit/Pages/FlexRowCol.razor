@@ -1,0 +1,35 @@
+﻿@page "/flex-rowcol"
+
+@using Flueris.Components
+
+<p>This demonstrates use of FlexRow and FlexCol to create a 3 column layout</p>
+<p>You can use classes w-25, w-50, w-75 etc. or cols-1 to cols-12 to set widths of the columns. Is this example cols-2, cols-4 and cols-6 are used for column layouts.</p>
+
+<FlexRow Class="border vh-100">
+    <FlexCol Class="cols-2 bg-light border-end p-3">
+        <ul class="m-0">
+            <li>first item</li>
+            <li>second item</li>
+            <li>third item</li>
+            <li>fourth item</li>
+            <li>fifth item</li>
+        </ul>
+    </FlexCol>
+    <FlexCol Class="cols-4 border-end p-3">
+        <Card>
+            <CardHeader>Quia illum tenetur nisi</CardHeader>
+            <CardBody>
+                Non in omnis earum eum laborum. Vitae ut id aspernatur nihil aut ex et quo vero. Molestias tempora vitae doloribus amet quaerat maiores delectus explicabo sed.
+            </CardBody>
+        </Card>
+    </FlexCol>
+    <FlexCol Class="cols-6 border-end p-3">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nulla sit amet tortor consequat varius. Quisque at dolor pulvinar, mollis urna in, aliquam tortor. Sed sed quam varius odio tristique consectetur. Aliquam erat volutpat. Proin bibendum pellentesque sapien, at faucibus nisi posuere ut. Quisque mollis ut ipsum sit amet rutrum. Nam tincidunt ligula eget sem mattis, in varius velit facilisis. Donec non iaculis enim. Nullam ullamcorper orci ac nisi porttitor, vitae tempus nisi porta. Duis aliquam nulla felis, nec elementum quam maximus id. Etiam rutrum et nulla vitae dignissim. Aenean quis posuere nulla. Ut ac orci aliquet elit mattis malesuada eget vel augue.
+        </p>
+    </FlexCol>
+</FlexRow>
+
+@code {
+
+}

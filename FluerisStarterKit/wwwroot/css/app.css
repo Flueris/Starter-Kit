@@ -12,6 +12,7 @@ html, body {
 
 .validation-message {
     color: red;
+    font-size: .875rem
 }
 
 #blazor-error-ui {
