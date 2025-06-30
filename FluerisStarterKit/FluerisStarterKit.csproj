@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Flueris.Components" Version="9.2.4" />
-    <PackageReference Include="Flueris.Extensions" Version="9.2.4" />
+    <PackageReference Include="Flueris.Components" Version="9.2.7" />
+    <PackageReference Include="Flueris.Extensions" Version="9.2.6" />
     <PackageReference Include="Flueris.Validations" Version="9.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.6" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
