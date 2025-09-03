@@ -36,7 +36,7 @@ main {
 }
 
 
-@media (width < 786px) {
+@media (width < 841px) {
     .sidebar {
         display: none
     }

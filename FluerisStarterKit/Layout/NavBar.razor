@@ -2,15 +2,15 @@
 @using Flueris.Extensions
 @using Flueris.Utilities
 
+@using Microsoft.AspNetCore.Components.Rendering
+
 <AppBar URL="/" ColorScheme="light">
     <!-- 
         Use the Overflow elements to display data in responsive mode. In this case we are displaying data as a treeview
     -->
     <AppBarOverflow>
-        <Hamburger Class="ms-3" @ref="@hb" OnClick="HamburgerClickEvent">
-            <div class="p-3">
-                <Treeview DataList="@GetTreeList()" ColorScheme="secondary" BorderStyle="none" />
-            </div>
+        <Hamburger @ref="@hb" OnClick="HamburgerClickEvent">
+            <Treeview DataList="@GetTreeList()" ColorScheme="secondary" BorderStyle="none" />
         </Hamburger>
     </AppBarOverflow>
 
@@ -23,37 +23,20 @@
     </Navigation>
     
     <Actions>
-        <Tooltip Position="bottom">
-            <Content>
-                <div class="tooltip-context">
-                    Link to Flueris components website.
-                </div>
-            </Content>
-            <Element>
-                <Links URL="https://flueris.com" OpenNewTab="true">Flueris</Links>
-            </Element>
-        </Tooltip>
-
-        <Tooltip Position="bottom">
-            <Content>
-                <div class="tooltip-context">
-                    Opens GitHub page for this project in a separate tab page
-                </div>
-            </Content>
-            <Element>
-                <Avatar Rounded=true Icon="fa-brands fa-github" ColorScheme="light" Position="right" URL="https://github.com/Flueris/Starter-Kit" />
-            </Element>
-        </Tooltip>
-
-        <Avatar Label="AB" Rounded=true Size="sm" ColorScheme="primary" Position="right">
-            <SignIn />
-        </Avatar>
+        @render_actions
     </Actions>
+
+    <!-- When responsive the vertical ellipsis  -->
+    <ActionOverflow>
+        <Ellipsis Class="mt-2" Color="dark" Orientation="vr" Position="right" DataList="@GetActionList()" />
+    </ActionOverflow>
 </AppBar>
 
 @code {
     private Hamburger hb;
     private List<DropdownItem> menu_list => GetMenu();
+
+    private RenderFragment render_actions => RenderActions;
 
     public List<DropdownItem> GetMenu()
     {
@@ -65,21 +48,59 @@
         return list;
     }
 
+    private List<DropdownItem> GetActionList()
+    {
+        List<DropdownItem> list = new()
+        {
+            new DropdownItem() { Id = "flueris", Label = "Flueris", Image="", URL = "https://flueris.com" },
+            new DropdownItem() { Id = "starter", Label = "Starter Kit", Icon = "fa-brands fa-github", URL = "https://github.com/Flueris/Starter-Kit" }
+        };
+
+        return list;
+    }
+
     private void HamburgerClickEvent()
     {
         hb.ToggleContent();
+    }
+
+    private void RenderActions(RenderTreeBuilder __builder)
+    {
+        <Tooltip Position="bottom">
+            <Content>
+                <div class="tooltip-context">
+                    Link to Flueris components website.
+                </div>
+            </Content>
+            <Element>
+                <Links URL="https://flueris.com" OpenNewTab="true" Class="fs-5">Flueris</Links>
+            </Element>
+        </Tooltip>
+
+        <Tooltip Position="bottom">
+            <Content>
+                <div class="tooltip-context">
+                    Opens GitHub page for this project in a separate tab page
+                </div>
+            </Content>
+            <Element>
+                <Links URL="https://github.com/Flueris/Starter-Kit" Icon="fa-brands fa-github fa-xl" ColorScheme="dark" OpenNewTab/>
+            </Element>
+        </Tooltip>
+
+        <Avatar Label="AB" Rounded=true Size="sm" ColorScheme="primary" Position="right">
+            <SignIn />
+        </Avatar>
     }
 
     private List<TreeItem> GetTreeList()
     {
         List<TreeItem> list = new()
         {
-            new TreeItem { Id = "1", Group = "0", Label = "Forms examples", Image = "icon-192.png"  },
+            new TreeItem { Id = "1", Group = "0", Label = "Forms examples"  },
             new TreeItem { Id = "2", Group = "0", Label = "Feedback examples", Icon = "fa-solid fa-message"  },
             new TreeItem { Id = "3", Group = "0", Label = "Table", Icon = "fas fa-table"  },
             new TreeItem { Id = "4", Group = "0", Label = "Flexbox", Icon = "fas fa-random"  },
-
-            new TreeItem { Id = "15", Group = "0", Label = "General", Icon = "fas fa-random"  },
 
             new TreeItem { Id = "1.1", Group = "1", Label = "Inputs", URL = "input-examples" },
             new TreeItem { Id = "1.2", Group = "1", Label = "Select", URL = "controlled-selection" },
@@ -91,8 +112,6 @@
             new TreeItem { Id = "3.2", Group = "3", Label = "Table Example B", URL = "table-examplea" },
 
             new TreeItem { Id = "4.1", Group = "4", Label = "FlexRow and FlexCol", URL = "flex-rowcol" },
-
-            new TreeItem { Id = "15.1", Group = "4", Label = "Counter", URL = "counter" }
         };
 
         return list;
