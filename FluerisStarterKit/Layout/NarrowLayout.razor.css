@@ -1,0 +1,40 @@
+﻿.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Overwrite the values in app.css */
+.content {
+    padding-top: 5.5rem;
+}
+
+@media (min-width: 576px) {
+    .page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 3rem;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        border-right: var(--bs-border-width) var( --bs-border-style) var(--bs-border-color);
+        z-index: 1045
+    }
+
+    article {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+@media (width < 786px) {
+    .sidebar {
+        display: none
+    }
+}

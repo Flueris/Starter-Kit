@@ -1,0 +1,41 @@
+﻿@inherits LayoutComponentBase
+
+@using Flueris.Extensions
+@using Flueris.Utilities
+
+<div class="page">
+    <div class="sidebar">
+        <Sidebar ColorScheme="primary" DataList="@GetSidebarList()" Variant="narrow-e" />
+    </div>
+
+    <main id="main">
+        <article class="content px-3">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private FluerisTheme theme = new();
+
+    // Group must be set to 0 for narrow version
+    private List<SidebarItem> GetSidebarList()
+    {
+        List<SidebarItem> list = new()
+        {
+            new SidebarItem { Id = "1.1", Group = "0", Label = "Inputs", Icon = "fas fa-font", URL = "input-examples" },
+            new SidebarItem { Id = "1.2", Group = "0", Label = "Select", Icon = "fas fa-list-ol", URL = "controlled-selection" },
+            new SidebarItem { Id = "1.3", Group = "0", Label = "Multiselect", Icon = "fa-solid fa-chevron-right", URL = "multiselect" },
+
+            new SidebarItem { Id = "2.1", Group = "0", Label = "Message", Icon = "fa-solid fa-comment", URL = "message" },
+            new SidebarItem { Id = "2.2", Group = "0", Label = "Toast", Icon = "fa-solid fa-bread-slice", URL = "toast-examples" },
+
+            new SidebarItem { Id = "3.1", Group = "0", Label = "Table Example A", Icon = "fas fa-table", URL = "table-weather" },
+            new SidebarItem { Id = "3.2", Group = "0", Label = "Table and Modal", Icon = "fas fa-list", URL = "table-examplea" },
+
+            new SidebarItem { Id = "4.1", Group = "0", Label = "FlexRow and FlexCol", Icon = "fas fa-columns", URL = "flex-rowcol" },
+        };
+
+        return list;
+    }
+}
